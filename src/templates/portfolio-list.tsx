@@ -19,15 +19,20 @@ export default function portfolioList({ data, pageContext, location }: PageProps
     return (
         <Layout
             seo={{
-                title: "Portfolio",
+                title: "Destinations",
             }}
             location={location}
         >
             <div className="py-12 px-4 lg:px-0">
                 <div className="title py-8 text-center">
                     <h2 className="font-black text-5xl text-color-1">
-                        Portfolio
+                        Destinations
                     </h2>
+                </div>
+                <div style={{paddingLeft: 50, paddingRight:50, alignContent: "center"}}>
+                    <text style={{fontSize: 20}}>
+                    There's much to see here. So, take your time, look around, and learn new things about different places I have visited and make use of my personal tips to make your trip a memorable one.
+                    </text>
                 </div>
                 <div className="flex flex-wrap">{portfolioItems}</div>
                 <div className="mt-8 lg:mt-24">
