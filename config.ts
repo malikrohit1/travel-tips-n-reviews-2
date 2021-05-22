@@ -128,7 +128,7 @@ const beforeContactFormSubmit = data => {
 }
 
 const contactFormSubmit = async (api, data) => {
-    let res: any = await fetch(api, {
+    let res: any = await fetch("https://formspree.io/f/xgerappb", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {

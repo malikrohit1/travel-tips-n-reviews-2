@@ -10,7 +10,7 @@ import { ContactQuery_site_siteMetadata_contact } from "../pages/__generated__/C
 
 type FeedbackState = { [id: number]: { message?: string, type?: string }}
 
-const Form: React.FC<{ api: string }> = ({ api }) => {
+const Form: React.FC<{ api: "https://formspree.io/f/xgerappb" }> = ({ api }) => {
     const [data, changeData] = useState({
         name: "",
         email: "",
@@ -25,7 +25,7 @@ const Form: React.FC<{ api: string }> = ({ api }) => {
 
     return (
         <form
-            onSubmit={event => {
+            onSubmit={async event => {
                 event.preventDefault()
                 setTransactionState(true);
 
@@ -33,33 +33,26 @@ const Form: React.FC<{ api: string }> = ({ api }) => {
 
                 if (validate.result) {
                     setFeedback({});
-                    contactFormSubmit(api, validate.data).then(res => {
-                        if (res.result) {
-                            setFeedback({
-                                4: {
-                                    type: "success",
-                                    message:
-                                        "Your message has been sent.",
-                                },
-                            })
-                        } else {
-                            setFeedback({
-                                4: {
-                                    message:
-                                        "There was an error sending the message. Please try again.",
-                                },
-                            })
-                        }
-                        setTransactionState(false);
-                    }).catch(err => {
-                        setFeedback({
-                            4: {
-                                message:
-                                    "There was an error sending the message. Please try again.",
-                            },
-                        })
-                        setTransactionState(false);
-                    })
+                    let res: any = await fetch("https://formspree.io/f/xgerappb", {
+                        method: "POST",
+                        body: JSON.stringify(data),
+                        headers: {
+                            Accept: "application/json",
+                            "Content-Type": "application/json",
+                        },
+                    }).then (()=>{setFeedback({
+                        4: {
+                            type: "success",
+                            message:
+                                "Your message has been sent.",
+                        },
+                    })}).catch(err => {setFeedback({
+                        4: {
+                            message:
+                            "There was an error sending the message. Please try again.",
+                        },
+                    })})
+                    setTransactionState(false);
                 } else {
                     const errs = {}
 
