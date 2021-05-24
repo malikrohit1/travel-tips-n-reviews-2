@@ -35,6 +35,19 @@ const plugins = [
         options: {
             gatsbyRemarkPlugins: [
                 {
+                    resolve: 'gatsby-remark-video',
+                    options: {
+                        width: 800,
+                        height: 'auto',
+                        preload: 'auto',
+                        muted: true,
+                        autoplay: true,
+                        playsinline: true,
+                        controls: true,
+                        loop: true
+                    }
+                },
+                {
                     resolve: `gatsby-remark-images`,
                     options: {
                         maxWidth: 1200,
